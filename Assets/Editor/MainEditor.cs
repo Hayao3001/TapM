@@ -136,7 +136,6 @@ public class EditMusicScore : EditorWindow
     // Windowのクライアント領域のGUI処理を記述
     void OnGUI()
     {
-        // 試しにラベルを表示
         EditorGUILayout.BeginHorizontal( GUI.skin.box );
         EditorGUILayout.BeginVertical( GUI.skin.box,GUILayout.Width ( 150 ) );
         leftScrollPos = EditorGUILayout.BeginScrollView( leftScrollPos,GUI.skin.box );
@@ -173,31 +172,32 @@ public class EditMusicScore : EditorWindow
             if(GUILayout.Button("Update")){
                 UpdateCSV();
             }
-            for(int i = 0; i <= 3; i++){
+            for(int i = 0; i <= 4; i++){
                 int a = i + 1;
                 GUILayout.Space(sp+3);
                 GUILayout.Box("bottomline"+a.ToString(), GUILayout.Height(heightspace),GUILayout.Width(120f));
             }
-            for(int i = 0; i <= 2; i++){
+            for(int i = 0; i <= 3; i++){
                 int a = i + 1;
                 GUILayout.Space(sp+3);
                 GUILayout.Box("rightline"+a.ToString(), GUILayout.Height(heightspace),GUILayout.Width(120f));
             }
-            for(int i = 0; i <= 3; i++){
+            for(int i = 0; i <= 4; i++){
                 int a = i + 1;
                 GUILayout.Space(sp+3);
                 GUILayout.Box("topline"+a.ToString(), GUILayout.Height(heightspace),GUILayout.Width(120f));
             }
-            for(int i = 0; i <= 2; i++){
+            for(int i = 0; i <= 3; i++){
                 int a = i + 1;
                 GUILayout.Space(sp+3);
                 GUILayout.Box("leftline"+a.ToString(), GUILayout.Height(heightspace),GUILayout.Width(120f));
             }
-            for(int i = 0; i <= 3; i++){
-                int a = i + 1;
-                GUILayout.Space(sp+3);
-                GUILayout.Box("diagonal"+a.ToString(), GUILayout.Height(heightspace),GUILayout.Width(120f));
-            }
+
+            //斜め方向の実装は様子見            // for(int i = 0; i <= 3; i++){
+            //     int a = i + 1;
+            //     GUILayout.Space(sp+3);
+            //     GUILayout.Box("diagonal"+a.ToString(), GUILayout.Height(heightspace),GUILayout.Width(120f));
+            // }
         }
         EditorGUILayout.EndScrollView();
 
@@ -313,11 +313,12 @@ public class AddBlock: EditorWindow{
     private static string filename = "MusicData";
     private static List<string[]> CSVData = new List<string[]>();
 
+    //斜め方向の実装は様子見
+    //"diagonal1","diagonal2","diagona3","diagonal4"
     private static readonly string[] Line = new string[]
     {
-        "bottomline1","bottomline2","bottomline3","bottomline4", "rightline1","rightline2","rightline3", 
-        "topline1","topline2","topline3","topline4", "leftline1","leftline2","leftline3",
-        "diagonal1","diagonal2","diagona3","diagonal4"
+        "bottomline1","bottomline2","bottomline3","bottomline4","bottomline5", "rightline1","rightline2","rightline3", "rightline4",
+        "topline1","topline2","topline3","topline4","topline5", "leftline1","leftline2","leftline3","leftline4",
     };
 
     private static readonly string[] BlockType = new string[]
