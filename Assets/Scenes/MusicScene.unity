@@ -305,6 +305,15 @@ MonoBehaviour:
   rightblcok: {fileID: 8262495248637801498, guid: 4c15aa1163a306e4f91dc9d3b9908c6b, type: 3}
   topblock: {fileID: 4182353593872863517, guid: 9ad4c1d847eebbe4e88638bc0e2a3d7b, type: 3}
   leftblock: {fileID: 54987814936368135, guid: 191bfcb0931ade04989fb3d3a5d0ab98, type: 3}
+  NotesImage: {fileID: 2606677211812781702, guid: ccdd08c4ddcef4a4cafd922e1d36d451, type: 3}
+  right_up_x: 7.4
+  right_up_y: 3.6
+  right_down_x: 7.4
+  right_down_y: -3.5
+  left_up_x: -7.2
+  left_up_y: 3.6
+  left_down_x: -7.2
+  left_down_y: -3.5
 --- !u!4 &1335334149
 Transform:
   m_ObjectHideFlags: 0
