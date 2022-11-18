@@ -43,6 +43,10 @@ public class CreateBlock : MonoBehaviour
     [SerializeField] private float left_down_x;
     [SerializeField] private float left_down_y;
 
+    public void Start(){
+        SetBlock("topline2");
+    }
+
     //ノーツの配置
     //引数はどのラインに落とすかのライン名
     public void SetBlock(string linename)
@@ -95,7 +99,6 @@ public class CreateBlock : MonoBehaviour
             linelength = right_down_x - left_down_x;
             //５分割します。
             place_x_y = left_down_x + ((linelength)/(float)5)*(0.5f+(float)(perlinenum-1));
-            Debug.Log(place_x_y);
 
             //設置場所の指定
             place = new Vector3(place_x_y,0f,0f);
@@ -126,7 +129,7 @@ public class CreateBlock : MonoBehaviour
             place = new Vector3(0f,place_x_y,0f);
 
             //ノーツの長さ指定
-            block_length = ((linelength)/(float)5) * length_basic;
+            block_length = ((linelength)/(float)4) * length_basic;
 
             //ノーツの配置
             notes = Instantiate(rightblcok,place, Quaternion.Euler(0f, 0f, 90f));

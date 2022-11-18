@@ -14,6 +14,15 @@ public class Block : MonoBehaviour
     //ブロックのスピード
     private float speed = 3.0f;
 
+    //判定領域に入ったときの判定変数
+    private bool isEntry = false;
+
+    public void ChangeIsEntry(){
+        isEntry = !isEntry;
+    }
+
+    private float difference_time;
+
     //speedの取得と設定
     public float GetSetSpeed{
         get{ return speed; }
@@ -32,6 +41,9 @@ public class Block : MonoBehaviour
     {
         //ブロックにスピードを与える
         SetSpeed();
+        if(isEntry){
+            difference_time = Time.time;
+        }
     }
 
     //ブロックにスピードを与えるメソッド
@@ -78,5 +90,15 @@ public class Block : MonoBehaviour
         // if(linename == "diagonally_left_down"){
         //     rb.AddForce((-1)*(float)(1/2)*speed,(-1)*(float)(System.Math.Sqrt(3)/2)*speed,0f);
         // }
+    }
+
+    private void OnTriggerEnter(Collider cl)
+    {
+        Debug.Log("Entry Line!!!");
+        ChangeIsEntry();
+    }
+
+    public float TimeDifference(){
+        return difference_time;
     }
 }
