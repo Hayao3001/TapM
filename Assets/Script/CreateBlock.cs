@@ -67,7 +67,7 @@ public class CreateBlock : MonoBehaviour
         block = bottomblock.GetComponent(typeof(Block)) as Block;
         //どのノーツのゲームオブジェクトも全てスピードが同じ
         notesspeed = block.GetSetSpeed;
-        SetBlock("leftline1", "Long", 0.0f, 2.3f);
+        // SetBlock("leftline1", "Long", 0.0f, 2.3f);
     }
 
     //ノーツの配置

@@ -1803,6 +1803,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   csvfile: {fileID: 4900000, guid: 115e83bb35ccfc34d9f2c6f13de3d679, type: 3}
+  CreateBlockObject: {fileID: 1335334147}
 --- !u!4 &758245319
 Transform:
   m_ObjectHideFlags: 0

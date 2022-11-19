@@ -33,21 +33,41 @@ public class GameManager : MonoBehaviour
     //csvファイル保存用変数
     [SerializeField] private TextAsset csvfile;
 
+    //ブロック生成用ゲームオブジェクト変数
+    [SerializeField] private GameObject CreateBlockObject;
+    
+    //ブロック生成オブジェクト
+    private CreateBlock createblock;
+
     //csvファイルの行数管理用変数
     private int rownum;
 
+    //現時刻代入用変数
+    private float nowtime = 0f;
+
     //csvデータ保存用list
     private List<CSVData> CSVDatas = new List<CSVData>();
+
+    //csvファイルデータの行数変換用変数
+    private int rowcount = 0;
     // Start is called before the first frame update
     void Start()
     {
         //CSVファイルからデータを受け取る関数
         GetCSV();
+        createblock = CreateBlockObject.GetComponent(typeof(CreateBlock)) as CreateBlock;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if(rowcount < rownum){
+            if(CSVDatas[rowcount].GetStartTime() < nowtime){
+                createblock.SetBlock(CSVDatas[rowcount].GetLineName(), CSVDatas[rowcount].GetType(), CSVDatas[rowcount].GetStartTime(), CSVDatas[rowcount].GetEndTime());
+                rowcount += 1;
+            }
+        }
+        nowtime += Time.deltaTime;
     }
 
     //CSVファイルからデータを受け取る関数
