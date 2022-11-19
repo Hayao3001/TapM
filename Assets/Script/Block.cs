@@ -42,7 +42,11 @@ public class Block : MonoBehaviour
         //ブロックにスピードを与える
         SetSpeed();
         if(isEntry){
-            difference_time = Time.time;
+            difference_time += Time.deltaTime;
+        }
+        
+        if(difference_time > 0.5f){
+            Destroy(this.gameObject);
         }
     }
 
