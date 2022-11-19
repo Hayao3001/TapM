@@ -4,21 +4,35 @@ using UnityEngine;
 
 public class CreateBlock : MonoBehaviour
 {
-    //下のラインのブロック生成
+    //下のラインのブロック生成用ゲームオブジェクト変数
     [SerializeField] private GameObject bottomblock;
 
-    //右のラインのブロック生成
+    //右のラインのブロック生成用ゲームオブジェクト変数
     [SerializeField] private GameObject rightblcok;
     
-    //上のラインのブロック生成
+    //上のラインのブロック生成用ゲームオブジェクト変数
     [SerializeField] private GameObject topblock;
 
-    //左のラインのブロック生成
+    //左のラインのブロック生成用ゲームオブジェクト変数
     [SerializeField] private GameObject leftblock;
 
-    //ノーツの画像
+    //下のラインのロングブロック生成用ゲームオブジェクト変数
+    [SerializeField] private GameObject bottomlongblock;
+
+    //右のラインのロングブロック生成用ゲームオブジェクト変数
+    [SerializeField] private GameObject rightlongblcok;
+    
+    //上のラインのロングブロック生成用ゲームオブジェクト変数
+    [SerializeField] private GameObject toplongblock;
+
+    //左のラインのロングブロック生成用ゲームオブジェクト変数
+    [SerializeField] private GameObject leftlongblock;
+
+    //ノーツの画像用ゲームオブジェクト変数
     [SerializeField] private GameObject NotesImage;
 
+    //ロングノーツ用画像用ゲームオブジェクト変数
+    [SerializeField] private GameObject LongImage;
     //斜めの実装は様子見
     //斜めのラインのブロック生成
     // [SerializeField] private GameObject diagonalblock_right_up;
@@ -26,30 +40,42 @@ public class CreateBlock : MonoBehaviour
     // [SerializeField] private GameObject diagonalblock_left_up;
     // [SerializeField] private GameObject diagonalblock_left_down;
 
-    //右上の座標
+    //右上の座標保存用変数
     [SerializeField] private float right_up_x;
     [SerializeField] private float right_up_y;
 
-    //右下の座標
+    //右下の座標保存用変数
     [SerializeField] private float right_down_x;
     [SerializeField] private float right_down_y;
 
 
-    //左上の座標
+    //左上の座標保存用変数
     [SerializeField] private float left_up_x;
     [SerializeField] private float left_up_y;
 
-    //左下の座標
+    //左下の座標保存用変数
     [SerializeField] private float left_down_x;
     [SerializeField] private float left_down_y;
 
+    //ノーツのスピードを保存する変数
+    private float notesspeed;
+
+    //ブロックのクラス変数。これでノーツスピードを取る。
+    Block block;
+
     public void Start(){
-        SetBlock("topline2");
+        block = bottomblock.GetComponent(typeof(Block)) as Block;
+        //どのノーツのゲームオブジェクトも全てスピードが同じ
+        notesspeed = block.GetSetSpeed;
+        SetBlock("leftline1", "Long", 0.0f, 2.3f);
     }
 
     //ノーツの配置
-    //引数はどのラインに落とすかのライン名
-    public void SetBlock(string linename)
+    //引数はどのラインに落とすかのライン名のlinename
+    //ロングノーツか普通のノーツかのを表すtype
+    //出現時間を示すstarttime
+    //ロングノーツの場合ロングノーツが終わる時間のendtime
+    public void SetBlock(string linename,string type, float starttime, float endtime)
     {
 
         //ライン名一覧
@@ -60,6 +86,13 @@ public class CreateBlock : MonoBehaviour
             "bottomline1","bottomline2","bottomline3","bottomline4","bottomline5", "rightline1","rightline2","rightline3", "rightline4",
             "topline1","topline2","topline3","topline4","topline5", "leftline1","leftline2","leftline3","leftline4",
         };
+
+        //ロングノーツの出現時間
+        float intertime = 0f;
+
+        if(type == "Long"){
+            intertime = endtime - starttime;
+        }
 
         //ライン番号
         int linenum = 0;
@@ -73,14 +106,20 @@ public class CreateBlock : MonoBehaviour
         float block_length;
         //変更される座標(上下ならx座標、右左ならy座標)
         float place_x_y;
-        //ノーツの長さの基準値
+        //ノーツの長さの基準値の変数
         float length_basic = 0.9f;
         //ノーツ配置用GameObject
         GameObject notes;
+        //ロングノーツ配置用GameObject
+        GameObject longnotes;
         //オブジェクトの大きさを代入するVector3
         Vector3 size;
-        //NoteImageの横幅
-        float width = NotesImage.GetComponent<SpriteRenderer>().bounds.size.x;
+        //NotesImageの横幅用変数
+        float noteswidth = NotesImage.GetComponent<SpriteRenderer>().bounds.size.x;
+        //LongNotesImageの横幅用変数
+        float longnoteswidth = LongImage.GetComponent<SpriteRenderer>().bounds.size.x;
+        //LongNotesImageの横幅用変数
+        float longnotesheigh = LongImage.GetComponent<SpriteRenderer>().bounds.size.y;
 
         
 
@@ -100,19 +139,40 @@ public class CreateBlock : MonoBehaviour
             //５分割します。
             place_x_y = left_down_x + ((linelength)/(float)5)*(0.5f+(float)(perlinenum-1));
 
-            //設置場所の指定
-            place = new Vector3(place_x_y,0f,0f);
 
             //ノーツの長さ指定
             block_length = ((linelength)/(float)5) * length_basic;
 
-            //ノーツの配置
-            notes = Instantiate(bottomblock,place, Quaternion.identity);
+            if(type == "Long"){
+                //ロングノーツのy座標変数
+                float place_y = (((notesspeed * intertime) / longnotesheigh)*longnotesheigh) * 0.5f;
 
-            //サイズ変更部分
-            size = notes.transform.localScale;
-            size.x = block_length / width;
-            notes.transform.localScale = size;
+                //設置場所の指定
+                place = new Vector3(place_x_y,place_y,0f);
+                //ロングノーツの配置
+                longnotes = Instantiate(bottomlongblock,place, Quaternion.identity);
+
+                Block longobject = longnotes.GetComponent(typeof(Block)) as Block;
+                longobject.ChangeIsLongNotes();
+                longobject.SetStartTIme(starttime);
+                longobject.SetEndTime(endtime);
+
+                //サイズ変更部分
+                size = longnotes.transform.localScale;
+                size.x = block_length / longnoteswidth;
+                size.y = (notesspeed * intertime) / longnotesheigh;
+                longnotes.transform.localScale = size;
+            }else{
+                //設置場所の指定
+                place = new Vector3(place_x_y,3f,0f);
+                //ノーツの配置
+                notes = Instantiate(bottomblock,place, Quaternion.identity);
+
+                //サイズ変更部分
+                size = notes.transform.localScale;
+                size.x = block_length / noteswidth;
+                notes.transform.localScale = size;
+            }
         }
         
         //右ラインへの配置
@@ -125,19 +185,42 @@ public class CreateBlock : MonoBehaviour
             //4分割します。
             place_x_y = right_up_y - ((linelength)/(float)4)*(0.5f+(float)(perlinenum-1));
 
-            //設置場所の指定
-            place = new Vector3(0f,place_x_y,0f);
-
             //ノーツの長さ指定
             block_length = ((linelength)/(float)4) * length_basic;
+            if(type == "Long"){
+                //ロングノーツのx座標変数
+                float place_x = (((notesspeed * intertime) / longnotesheigh)*longnotesheigh) * 0.5f;
 
-            //ノーツの配置
-            notes = Instantiate(rightblcok,place, Quaternion.Euler(0f, 0f, 90f));
+                //設置場所の指定
+                place = new Vector3(-1.0f*place_x,place_x_y,0f);
 
-            //サイズ変更部分
-            size = notes.transform.localScale;
-            size.x = block_length / width;
-            notes.transform.localScale = size;
+                //ロングノーツの配置
+                longnotes = Instantiate(rightlongblcok,place, Quaternion.Euler(0f, 0f, 90f));
+
+                //Blockクラスのロングノーツである設定を行う。
+                Block longobject = longnotes.GetComponent(typeof(Block)) as Block;
+                longobject.ChangeIsLongNotes();
+                longobject.SetStartTIme(starttime);
+                longobject.SetEndTime(endtime);
+
+                //サイズ変更部分
+                size = longnotes.transform.localScale;
+                size.x = block_length / longnoteswidth;
+                size.y = (notesspeed * intertime) / longnotesheigh;
+                longnotes.transform.localScale = size;
+
+            }else{
+                //設置場所の指定
+                place = new Vector3(0f,place_x_y,0f);
+                
+                //ノーツの配置
+                notes = Instantiate(rightblcok,place, Quaternion.Euler(0f, 0f, 90f));
+
+                //サイズ変更部分
+                size = notes.transform.localScale;
+                size.x = block_length / noteswidth;
+                notes.transform.localScale = size;
+            }
         }
 
         //上ラインへの配置
@@ -149,19 +232,43 @@ public class CreateBlock : MonoBehaviour
             //５分割します。
             place_x_y = left_up_x + ((linelength)/(float)5)*(0.5f+(float)(perlinenum-1));
 
-            //設置場所の指定
-            place = new Vector3(place_x_y,0f,0f);
-
             //ノーツの長さ指定
             block_length = ((linelength)/(float)5) * length_basic;
 
-            //ノーツの配置
-            notes = Instantiate(topblock,place, Quaternion.identity);
+            if(type == "Long"){
+                //ロングノーツのy座標変数
+                float place_y = (((notesspeed * intertime) / longnotesheigh)*longnotesheigh) * 0.5f;
 
-            //サイズ変更部分
-            size = notes.transform.localScale;
-            size.x = block_length / width;
-            notes.transform.localScale = size;
+                //設置場所の指定
+                place = new Vector3(place_x_y,-1.0f*place_y,0f);
+
+                //ロングノーツの配置
+                longnotes = Instantiate(toplongblock,place, Quaternion.identity);
+
+                //Blockクラスのロングノーツである設定を行う。
+                Block longobject = longnotes.GetComponent(typeof(Block)) as Block;
+                longobject.ChangeIsLongNotes();
+                longobject.SetStartTIme(starttime);
+                longobject.SetEndTime(endtime);
+
+                //サイズ変更部分
+                size = longnotes.transform.localScale;
+                size.x = block_length / longnoteswidth;
+                size.y = (notesspeed * intertime) / longnotesheigh;
+                longnotes.transform.localScale = size;
+
+            }else{
+                //設置場所の指定
+                place = new Vector3(place_x_y,-3f,0f);
+
+                //ノーツの配置
+                notes = Instantiate(topblock,place, Quaternion.identity);
+
+                //サイズ変更部分
+                size = notes.transform.localScale;
+                size.x = block_length / noteswidth;
+                notes.transform.localScale = size;
+            }
         }
 
         //左ラインへの配置
@@ -173,19 +280,43 @@ public class CreateBlock : MonoBehaviour
             //4分割します。
             place_x_y = left_up_y - ((linelength)/(float)4)*(0.5f+(float)(perlinenum-1));
 
-            //設置場所の指定
-            place = new Vector3(0f,place_x_y,0f);
-
             //ノーツの長さ指定
             block_length = ((linelength)/(float)4) * length_basic;
 
-            //ノーツの配置
-            notes = Instantiate(leftblock,place, Quaternion.Euler(0f, 0f, 90f));
+            if(type == "Long"){
+                //ロングノーツのx座標変数
+                float place_x = (((notesspeed * intertime) / longnotesheigh)*longnotesheigh) * 0.5f;
 
-            //サイズ変更部分
-            size = notes.transform.localScale;
-            size.x = block_length / width;
-            notes.transform.localScale = size;
+                //設置場所の指定
+                place = new Vector3(place_x,place_x_y,0f);
+        
+                //ロングノーツの配置
+                longnotes = Instantiate(leftlongblock,place, Quaternion.Euler(0f, 0f, 90f));
+
+                //Blockクラスのロングノーツである設定を行う。
+                Block longobject = longnotes.GetComponent(typeof(Block)) as Block;
+                longobject.ChangeIsLongNotes();
+                longobject.SetStartTIme(starttime);
+                longobject.SetEndTime(endtime);
+
+                //サイズ変更部分
+                size = longnotes.transform.localScale;
+                size.x = block_length / longnoteswidth;
+                size.y = (notesspeed * intertime) / longnotesheigh;
+                longnotes.transform.localScale = size;
+
+            }else{
+                //設置場所の指定
+                place = new Vector3(0f,place_x_y,0f);
+
+                //ノーツの配置
+                notes = Instantiate(leftblock,place, Quaternion.Euler(0f, 0f, 90f));
+
+                //サイズ変更部分
+                size = notes.transform.localScale;
+                size.x = block_length / noteswidth;
+                notes.transform.localScale = size;
+            }
         }
     }
 

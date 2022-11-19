@@ -59,7 +59,7 @@ public class GameManager : MonoBehaviour
         //CSVファイルのデータを１行ずつみて列ごとに分割してCSVDatasにデータを追加する処理。
         while(file.Peek() != -1){
             string line = file.ReadLine();
-            CSVData[] csvdata = new CSVData[]{new CSVData(line.Split(',')[0],line.Split(',')[1],float.Parse(line.Split(',')[2]),float.Parse(line.Split(',')[3]))};
+            CSVData[] csvdata = new CSVData[]{new CSVData(line.Split(',')[0],line.Split(',')[1],(float.Parse(line.Split(',')[2])-1.0f),(float.Parse(line.Split(',')[3]))-1.0f)};
             CSVDatas.AddRange(csvdata);
             rownum = rownum + 1;
         }

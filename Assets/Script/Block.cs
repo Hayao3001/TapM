@@ -12,7 +12,7 @@ public class Block : MonoBehaviour
     private Rigidbody rb;
 
     //ブロックのスピード
-    private float speed = 3.0f;
+    private float speed = 6.0f;
 
     //判定領域に入ったときの判定変数
     private bool isEntry = false;
@@ -29,11 +29,53 @@ public class Block : MonoBehaviour
         set{ speed = value; }
     }
     
+    //ノーツかロングノーツかどうかを判定するbool変数
+    private bool islongnotes = false;
+
+    //islongnotesをtrueに変える関数
+    public void ChangeIsLongNotes(){
+        islongnotes = true;
+    }
+
+    public bool GetIsLongNotes(){
+        return islongnotes;
+    }
+
+    //開始時間を記録する変数
+    private float starttime = 0f;
+
+    public void SetStartTIme(float starttime){
+        this.starttime = starttime;
+    }
+    //最後の時間を記録する変数
+    private float endtime = 0f;
+
+    public void SetEndTime(float endtime){
+        this.endtime = endtime;
+    }
+
+    //ロングノーツだった場合の時間間
+    private float intertime;
+
+    //ロングノーツが判定ラインに入ったときの判定変数
+    private bool isEntryLongNotes = false;
+
+    public void ChangeisEntryLongNotes(){
+        isEntryLongNotes = !isEntryLongNotes;
+    }
+
+    //ロングノーツが侵入したときに記録する時間変数
+    private float longnotes_entrytime;
+
     // Start is called before the first frame update
     void Start()
     {
         //自分自身を指定
         rb = GetComponent<Rigidbody>();
+        if(islongnotes){
+            intertime = endtime - starttime;
+            Debug.Log(intertime);
+        }
     }
 
     // Update is called once per frame
@@ -44,9 +86,22 @@ public class Block : MonoBehaviour
         if(isEntry){
             difference_time += Time.deltaTime;
         }
-        
-        if(difference_time > 0.5f){
-            Destroy(this.gameObject);
+
+        if(isEntryLongNotes){
+            longnotes_entrytime += Time.deltaTime;
+        }
+        //ロングノーツか否か
+        if(islongnotes){
+            //ロングノーツが入ったときの時間を記録して、その時間がロングノーツ単体の時間+1.0f秒経過したらそのオブジェクトを消す
+            if(longnotes_entrytime > intertime + 1.0f){
+                Destroy(this.gameObject);
+            }
+
+        }else{
+            //ノーツが入って1.0f秒立ったらそのオブジェクトを消す。
+            if(difference_time > 1.0f){
+                Destroy(this.gameObject);
+            }
         }
     }
 
@@ -55,22 +110,22 @@ public class Block : MonoBehaviour
 
         //下のラインなら下にスピードを与える。
         if(linename == "bottom"){
-            rb.AddForce(0f,-1*speed,0f);
+            rb.velocity = new Vector3(0f,-1*speed,0f);
         }
 
         //右のラインなら右にスピードを与える
         if(linename == "right"){
-            rb.AddForce(speed,0f,0f);
+            rb.velocity = new Vector3(speed,0f,0f);
         }
 
         //左のラインなら左にスピードを与える
         if(linename == "left"){
-            rb.AddForce(-1*speed,0f,0f);
+            rb.velocity = new Vector3(-1*speed,0f,0f);
         }
 
         //上のラインなら上にスピードを与える
         if(linename == "top"){
-            rb.AddForce(0f,speed, 0f);
+            rb.velocity = new Vector3(0f,speed, 0f);
         }
 
         //こっちは一度様子見
@@ -94,12 +149,6 @@ public class Block : MonoBehaviour
         // if(linename == "diagonally_left_down"){
         //     rb.AddForce((-1)*(float)(1/2)*speed,(-1)*(float)(System.Math.Sqrt(3)/2)*speed,0f);
         // }
-    }
-
-    private void OnTriggerEnter(Collider cl)
-    {
-        Debug.Log("Entry Line!!!");
-        ChangeIsEntry();
     }
 
     public float TimeDifference(){

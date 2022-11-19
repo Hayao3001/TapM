@@ -137,7 +137,7 @@ GameObject:
   - component: {fileID: 17263619}
   - component: {fileID: 17263618}
   - component: {fileID: 17263617}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: rightLine1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -158,6 +158,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Delegates:
   - eventID: 4
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 17263618}
+          m_TargetAssemblyTypeName: Player, Assembly-CSharp
+          m_MethodName: PointerCheck
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 2
     callback:
       m_PersistentCalls:
         m_Calls:
@@ -185,6 +201,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25f03523a73b2654eb15cac9e5e90776, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  linename: right
 --- !u!65 &17263619
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -275,7 +292,7 @@ GameObject:
   - component: {fileID: 50760234}
   - component: {fileID: 50760233}
   - component: {fileID: 50760232}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: topLine4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -296,6 +313,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Delegates:
   - eventID: 4
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 50760233}
+          m_TargetAssemblyTypeName: Player, Assembly-CSharp
+          m_MethodName: PointerCheck
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 2
     callback:
       m_PersistentCalls:
         m_Calls:
@@ -323,6 +356,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25f03523a73b2654eb15cac9e5e90776, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  linename: top
 --- !u!65 &50760234
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -393,7 +427,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 50760231}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 3.09, y: 3.79, z: 0}
+  m_LocalPosition: {x: 3.09, y: 3.8, z: 0}
   m_LocalScale: {x: 2.6488853, y: 0.58213794, z: 1}
   m_Children: []
   m_Father: {fileID: 1724551892}
@@ -413,7 +447,7 @@ GameObject:
   - component: {fileID: 80420625}
   - component: {fileID: 80420624}
   - component: {fileID: 80420623}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: topLine1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -434,6 +468,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Delegates:
   - eventID: 4
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 80420624}
+          m_TargetAssemblyTypeName: Player, Assembly-CSharp
+          m_MethodName: PointerCheck
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 2
     callback:
       m_PersistentCalls:
         m_Calls:
@@ -461,6 +511,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25f03523a73b2654eb15cac9e5e90776, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  linename: top
 --- !u!65 &80420625
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -531,7 +582,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 80420622}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -5.8906994, y: 3.79, z: 0}
+  m_LocalPosition: {x: -5.8906994, y: 3.8, z: 0}
   m_LocalScale: {x: 2.6488853, y: 0.58213794, z: 1}
   m_Children: []
   m_Father: {fileID: 1724551892}
@@ -551,7 +602,7 @@ GameObject:
   - component: {fileID: 127385740}
   - component: {fileID: 127385739}
   - component: {fileID: 127385738}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: leftLine4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -572,6 +623,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Delegates:
   - eventID: 4
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 127385739}
+          m_TargetAssemblyTypeName: Player, Assembly-CSharp
+          m_MethodName: PointerCheck
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 2
     callback:
       m_PersistentCalls:
         m_Calls:
@@ -599,6 +666,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25f03523a73b2654eb15cac9e5e90776, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  linename: left
 --- !u!65 &127385740
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -689,7 +757,7 @@ GameObject:
   - component: {fileID: 172406558}
   - component: {fileID: 172406557}
   - component: {fileID: 172406556}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: bottomLine3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -710,6 +778,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Delegates:
   - eventID: 4
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 172406557}
+          m_TargetAssemblyTypeName: Player, Assembly-CSharp
+          m_MethodName: PointerCheck
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 2
     callback:
       m_PersistentCalls:
         m_Calls:
@@ -737,6 +821,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25f03523a73b2654eb15cac9e5e90776, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  linename: bottom
 --- !u!65 &172406558
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -807,7 +892,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 172406555}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.09, y: -3.68, z: 0}
+  m_LocalPosition: {x: 0.09, y: -3.7, z: 0}
   m_LocalScale: {x: 2.6488853, y: 0.48902714, z: 1}
   m_Children: []
   m_Father: {fileID: 1724551892}
@@ -827,7 +912,7 @@ GameObject:
   - component: {fileID: 185067972}
   - component: {fileID: 185067971}
   - component: {fileID: 185067970}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: topLine3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -848,6 +933,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Delegates:
   - eventID: 4
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 185067971}
+          m_TargetAssemblyTypeName: Player, Assembly-CSharp
+          m_MethodName: PointerCheck
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 2
     callback:
       m_PersistentCalls:
         m_Calls:
@@ -875,6 +976,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25f03523a73b2654eb15cac9e5e90776, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  linename: top
 --- !u!65 &185067972
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -945,7 +1047,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 185067969}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.120299906, y: 3.79, z: 0}
+  m_LocalPosition: {x: 0.120299906, y: 3.8, z: 0}
   m_LocalScale: {x: 2.6488853, y: 0.58213794, z: 1}
   m_Children: []
   m_Father: {fileID: 1724551892}
@@ -965,7 +1067,7 @@ GameObject:
   - component: {fileID: 307545704}
   - component: {fileID: 307545703}
   - component: {fileID: 307545702}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: rightLine4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -986,6 +1088,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Delegates:
   - eventID: 4
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 307545703}
+          m_TargetAssemblyTypeName: Player, Assembly-CSharp
+          m_MethodName: PointerCheck
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 2
     callback:
       m_PersistentCalls:
         m_Calls:
@@ -1013,6 +1131,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25f03523a73b2654eb15cac9e5e90776, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  linename: right
 --- !u!65 &307545704
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1103,7 +1222,7 @@ GameObject:
   - component: {fileID: 354839811}
   - component: {fileID: 354839810}
   - component: {fileID: 354839809}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: topLine2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1124,6 +1243,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Delegates:
   - eventID: 4
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 354839810}
+          m_TargetAssemblyTypeName: Player, Assembly-CSharp
+          m_MethodName: PointerCheck
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 2
     callback:
       m_PersistentCalls:
         m_Calls:
@@ -1151,6 +1286,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25f03523a73b2654eb15cac9e5e90776, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  linename: top
 --- !u!65 &354839811
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1221,7 +1357,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 354839808}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2.8596, y: 3.79, z: 0}
+  m_LocalPosition: {x: -2.8596, y: 3.8, z: 0}
   m_LocalScale: {x: 2.6488853, y: 0.58213794, z: 1}
   m_Children: []
   m_Father: {fileID: 1724551892}
@@ -1241,7 +1377,7 @@ GameObject:
   - component: {fileID: 534573365}
   - component: {fileID: 534573364}
   - component: {fileID: 534573363}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: topLine5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1262,6 +1398,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Delegates:
   - eventID: 4
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 534573364}
+          m_TargetAssemblyTypeName: Player, Assembly-CSharp
+          m_MethodName: PointerCheck
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 2
     callback:
       m_PersistentCalls:
         m_Calls:
@@ -1289,6 +1441,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25f03523a73b2654eb15cac9e5e90776, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  linename: top
 --- !u!65 &534573365
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1359,7 +1512,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 534573362}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 5.9982004, y: 3.79, z: 0}
+  m_LocalPosition: {x: 5.9982004, y: 3.8, z: 0}
   m_LocalScale: {x: 2.6488853, y: 0.58213794, z: 1}
   m_Children: []
   m_Father: {fileID: 1724551892}
@@ -1479,7 +1632,7 @@ GameObject:
   - component: {fileID: 744356158}
   - component: {fileID: 744356157}
   - component: {fileID: 744356156}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: bottomLine2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1500,6 +1653,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Delegates:
   - eventID: 4
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 744356157}
+          m_TargetAssemblyTypeName: Player, Assembly-CSharp
+          m_MethodName: PointerCheck
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 2
     callback:
       m_PersistentCalls:
         m_Calls:
@@ -1527,6 +1696,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25f03523a73b2654eb15cac9e5e90776, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  linename: bottom
 --- !u!65 &744356158
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1597,7 +1767,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 744356155}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2.8899, y: -3.68, z: 0}
+  m_LocalPosition: {x: -2.8899, y: -3.7, z: 0}
   m_LocalScale: {x: 2.6488853, y: 0.48902714, z: 1}
   m_Children: []
   m_Father: {fileID: 1724551892}
@@ -1661,7 +1831,7 @@ GameObject:
   - component: {fileID: 882211359}
   - component: {fileID: 882211358}
   - component: {fileID: 882211357}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: bottomLine5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1682,6 +1852,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Delegates:
   - eventID: 4
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 882211358}
+          m_TargetAssemblyTypeName: Player, Assembly-CSharp
+          m_MethodName: PointerCheck
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 2
     callback:
       m_PersistentCalls:
         m_Calls:
@@ -1709,6 +1895,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25f03523a73b2654eb15cac9e5e90776, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  linename: bottom
 --- !u!65 &882211359
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1779,7 +1966,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 882211356}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 5.9679003, y: -3.68, z: 0}
+  m_LocalPosition: {x: 5.9679003, y: -3.7, z: 0}
   m_LocalScale: {x: 2.6488853, y: 0.48902714, z: 1}
   m_Children: []
   m_Father: {fileID: 1724551892}
@@ -1799,7 +1986,7 @@ GameObject:
   - component: {fileID: 1087062253}
   - component: {fileID: 1087062252}
   - component: {fileID: 1087062251}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: leftLine2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1820,6 +2007,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Delegates:
   - eventID: 4
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1087062252}
+          m_TargetAssemblyTypeName: Player, Assembly-CSharp
+          m_MethodName: PointerCheck
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 2
     callback:
       m_PersistentCalls:
         m_Calls:
@@ -1847,6 +2050,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25f03523a73b2654eb15cac9e5e90776, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  linename: left
 --- !u!65 &1087062253
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1937,7 +2141,7 @@ GameObject:
   - component: {fileID: 1119720771}
   - component: {fileID: 1119720770}
   - component: {fileID: 1119720769}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: leftLine3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1958,6 +2162,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Delegates:
   - eventID: 4
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1119720770}
+          m_TargetAssemblyTypeName: Player, Assembly-CSharp
+          m_MethodName: PointerCheck
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 2
     callback:
       m_PersistentCalls:
         m_Calls:
@@ -1985,6 +2205,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25f03523a73b2654eb15cac9e5e90776, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  linename: left
 --- !u!65 &1119720771
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2094,7 +2315,12 @@ MonoBehaviour:
   rightblcok: {fileID: 8262495248637801498, guid: 4c15aa1163a306e4f91dc9d3b9908c6b, type: 3}
   topblock: {fileID: 4182353593872863517, guid: 9ad4c1d847eebbe4e88638bc0e2a3d7b, type: 3}
   leftblock: {fileID: 54987814936368135, guid: 191bfcb0931ade04989fb3d3a5d0ab98, type: 3}
+  bottomlongblock: {fileID: 4348707353788204403, guid: 18f4049acb0ca7a44b1173ff7e9f86da, type: 3}
+  rightlongblcok: {fileID: 2466253043587349714, guid: 602b520656a770d44a0b09735f795ab3, type: 3}
+  toplongblock: {fileID: 6472099592551329854, guid: 5052dd6f167f3da4ca27f872928b6caf, type: 3}
+  leftlongblock: {fileID: 6453123318555913207, guid: 2eb194c1cdb1adf4c93c6582bbb7ff24, type: 3}
   NotesImage: {fileID: 2606677211812781702, guid: ccdd08c4ddcef4a4cafd922e1d36d451, type: 3}
+  LongImage: {fileID: 1110521140505211874, guid: 4f462cfc43aa5bd49b19c25506112b8e, type: 3}
   right_up_x: 7.4
   right_up_y: 3.6
   right_down_x: 7.4
@@ -2131,7 +2357,7 @@ GameObject:
   - component: {fileID: 1549379144}
   - component: {fileID: 1549379143}
   - component: {fileID: 1549379142}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: rightLine2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2152,6 +2378,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Delegates:
   - eventID: 4
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1549379143}
+          m_TargetAssemblyTypeName: Player, Assembly-CSharp
+          m_MethodName: PointerCheck
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 2
     callback:
       m_PersistentCalls:
         m_Calls:
@@ -2179,6 +2421,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25f03523a73b2654eb15cac9e5e90776, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  linename: right
 --- !u!65 &1549379144
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2465,7 +2708,7 @@ GameObject:
   - component: {fileID: 1832941702}
   - component: {fileID: 1832941701}
   - component: {fileID: 1832941700}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: bottomLine4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2486,6 +2729,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Delegates:
   - eventID: 4
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1832941701}
+          m_TargetAssemblyTypeName: Player, Assembly-CSharp
+          m_MethodName: PointerCheck
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 2
     callback:
       m_PersistentCalls:
         m_Calls:
@@ -2513,6 +2772,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25f03523a73b2654eb15cac9e5e90776, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  linename: bottom
 --- !u!65 &1832941702
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2583,7 +2843,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1832941699}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 3.0597, y: -3.68, z: 0}
+  m_LocalPosition: {x: 3.0597, y: -3.7, z: 0}
   m_LocalScale: {x: 2.6488853, y: 0.48902714, z: 1}
   m_Children: []
   m_Father: {fileID: 1724551892}
@@ -2603,7 +2863,7 @@ GameObject:
   - component: {fileID: 1892421933}
   - component: {fileID: 1892421932}
   - component: {fileID: 1892421931}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: rightLine3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2624,6 +2884,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Delegates:
   - eventID: 4
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1892421932}
+          m_TargetAssemblyTypeName: Player, Assembly-CSharp
+          m_MethodName: PointerCheck
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 2
     callback:
       m_PersistentCalls:
         m_Calls:
@@ -2651,6 +2927,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25f03523a73b2654eb15cac9e5e90776, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  linename: right
 --- !u!65 &1892421933
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2741,7 +3018,7 @@ GameObject:
   - component: {fileID: 1959601797}
   - component: {fileID: 1959601796}
   - component: {fileID: 1959601795}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: bottomLine1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2762,6 +3039,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Delegates:
   - eventID: 4
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1959601796}
+          m_TargetAssemblyTypeName: Player, Assembly-CSharp
+          m_MethodName: PointerCheck
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 2
     callback:
       m_PersistentCalls:
         m_Calls:
@@ -2789,6 +3082,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25f03523a73b2654eb15cac9e5e90776, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  linename: bottom
 --- !u!65 &1959601797
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2859,7 +3153,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1959601794}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -5.9209995, y: -3.68, z: 0}
+  m_LocalPosition: {x: -5.9209995, y: -3.7, z: 0}
   m_LocalScale: {x: 2.6488853, y: 0.48902714, z: 1}
   m_Children: []
   m_Father: {fileID: 1724551892}
@@ -2879,7 +3173,7 @@ GameObject:
   - component: {fileID: 2075541461}
   - component: {fileID: 2075541460}
   - component: {fileID: 2075541459}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: leftLine1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2900,6 +3194,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Delegates:
   - eventID: 4
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 2075541460}
+          m_TargetAssemblyTypeName: Player, Assembly-CSharp
+          m_MethodName: PointerCheck
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 2
     callback:
       m_PersistentCalls:
         m_Calls:
@@ -2927,6 +3237,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25f03523a73b2654eb15cac9e5e90776, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  linename: left
 --- !u!65 &2075541461
 BoxCollider:
   m_ObjectHideFlags: 0
