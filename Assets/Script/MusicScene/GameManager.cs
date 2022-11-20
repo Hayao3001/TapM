@@ -5,6 +5,7 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Video;
+using UnityEngine.SceneManagement;
 
 //CSVデータ保存用のクラス
 class CSVData{
@@ -92,6 +93,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Time.timeScale = 1;
         //CSVファイルからデータを受け取る関数
         GetCSV();
         //ノーツ生成用クラス定義
@@ -177,5 +179,25 @@ public class GameManager : MonoBehaviour
 
     public void OnClickPause(){
         Time.timeScale = 0;
+        restart_button.SetActive(true);
+        exit_button.SetActive(true);
+        retry_button.SetActive(true);
+        pause_button.SetActive(false);
+    }
+
+    public void OnClickRetryButton(){
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    public void OnClickRestartButton(){
+        Time.timeScale = 1;
+        restart_button.SetActive(false);
+        exit_button.SetActive(false);
+        retry_button.SetActive(false);
+        pause_button.SetActive(true);
+    }
+
+    public void OnClickExitButton(){
+        SceneManager.LoadScene("SelectScene");
     }
 }
