@@ -4,6 +4,7 @@ using System.IO;
 using System;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Video;
 
 //CSVデータ保存用のクラス
 class CSVData{
@@ -37,6 +38,25 @@ public class GameManager : MonoBehaviour
     //ブロック生成用ゲームオブジェクト変数
     [SerializeField] private GameObject CreateBlockObject;
     
+    //Restartボタン用ゲームオブジェクト変数
+    [SerializeField] private GameObject restart_button;
+    // private Button restart_button;
+
+    //Exitボタン用ゲームオブジェクト変数
+    [SerializeField] private GameObject exit_button;
+    // private Button exit_button;
+
+    //Retryボタン用ゲームオブジェクト変数
+    [SerializeField] private GameObject retry_button;
+    // private Button retry_button;
+
+    //PAUSEボタン用ゲームオブジェクト変数
+    [SerializeField] private GameObject pause_button;
+
+    //動画用ゲームオブジェクト変数
+    [SerializeField] private GameObject VideoClip;
+    private VideoPlayer videoplayer; 
+
     //ブロック生成オブジェクト
     private CreateBlock createblock;
 
@@ -65,27 +85,47 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject ScoreText;
     private Text score_text;
 
+    //動画が再生し終わったあとのカウントダウン用変数
+    private float countdown = 1.5f;
+
+
     // Start is called before the first frame update
     void Start()
     {
         //CSVファイルからデータを受け取る関数
         GetCSV();
+        //ノーツ生成用クラス定義
         createblock = CreateBlockObject.GetComponent(typeof(CreateBlock)) as CreateBlock;
-        Debug.Log(pernotesscore);
+        //スコア表示用の定義
         score_text = ScoreText.GetComponent(typeof(Text)) as Text;
+        //ボタンは最初は非表示にしておく
+        restart_button.SetActive(false);
+        exit_button.SetActive(false);
+        retry_button.SetActive(false);
+        pause_button.SetActive(false);
+        //メディアプレイヤーを設定
+        videoplayer = VideoClip.GetComponent(typeof(VideoPlayer)) as VideoPlayer;
+        videoplayer.Play();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(rowcount < rownum){
-            if(CSVDatas[rowcount].GetStartTime() < nowtime){
-                createblock.SetBlock(CSVDatas[rowcount].GetLineName(), CSVDatas[rowcount].GetType(), CSVDatas[rowcount].GetStartTime(), CSVDatas[rowcount].GetEndTime());
-                rowcount += 1;
+        if(!videoplayer.isPlaying && Time.time > 1.0f){
+            if(countdown < 0.0f){
+                if(rowcount < rownum){
+                    if(CSVDatas[rowcount].GetStartTime() < nowtime){
+                        createblock.SetBlock(CSVDatas[rowcount].GetLineName(), CSVDatas[rowcount].GetType(), CSVDatas[rowcount].GetStartTime(), CSVDatas[rowcount].GetEndTime());
+                        rowcount += 1;
+                    }
+                }
+                nowtime += Time.deltaTime;
+                score_text.text = score.ToString("f0");
+            }else{
+                countdown -= Time.deltaTime;
+                pause_button.SetActive(true);
             }
         }
-        nowtime += Time.deltaTime;
-        score_text.text = score.ToString("f0");
     }
 
     //CSVファイルからデータを受け取る関数
@@ -133,5 +173,9 @@ public class GameManager : MonoBehaviour
         if(jugde == "miss"){
             score += 0.0f;
         }
+    }
+
+    public void OnClickPause(){
+        Time.timeScale = 0;
     }
 }

@@ -35,7 +35,6 @@ public class Player : MonoBehaviour
     public void PointerCheck(){
         if(notes != null){
             notes.ChangeIsEntry();
-            // Debug.Log("TimeDifference:"+notes.TimeDifference());
             if(notes.GetIsLongNotes()){
                 var difference_time = notes.GetInterTime() - notes.TimeDifference();
                 if((-0.2f < difference_time) && (difference_time < 0.2f)){
