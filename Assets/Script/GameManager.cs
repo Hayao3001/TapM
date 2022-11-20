@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System;
 using UnityEngine;
+using UnityEngine.UI;
 
 //CSVデータ保存用のクラス
 class CSVData{
@@ -48,14 +49,30 @@ public class GameManager : MonoBehaviour
     //csvデータ保存用list
     private List<CSVData> CSVDatas = new List<CSVData>();
 
+    //スコア用変数
+    private float score = 0f;
+
     //csvファイルデータの行数変換用変数
     private int rowcount = 0;
+
+    //パーフェクト時のスコアの変数
+    private float perfectscore = 1000000f;
+
+    //一ノーツのスコア保存用変数
+    private float pernotesscore;
+
+    //Score表示用ゲームオブジェクトとテキストクラス変数
+    [SerializeField] private GameObject ScoreText;
+    private Text score_text;
+
     // Start is called before the first frame update
     void Start()
     {
         //CSVファイルからデータを受け取る関数
         GetCSV();
         createblock = CreateBlockObject.GetComponent(typeof(CreateBlock)) as CreateBlock;
+        Debug.Log(pernotesscore);
+        score_text = ScoreText.GetComponent(typeof(Text)) as Text;
     }
 
     // Update is called once per frame
@@ -68,6 +85,7 @@ public class GameManager : MonoBehaviour
             }
         }
         nowtime += Time.deltaTime;
+        score_text.text = score.ToString("f0");
     }
 
     //CSVファイルからデータを受け取る関数
@@ -96,6 +114,24 @@ public class GameManager : MonoBehaviour
             return 0;
         }else{
             return -1;
+        }
+    }
+
+    //スコア計算関数
+    public void SetScore(string jugde){
+        pernotesscore = (perfectscore / (float)rowcount);
+        Debug.Log(jugde);
+        if(jugde == "perfect"){
+            score += pernotesscore;
+        }
+        if(jugde == "great"){
+            score += pernotesscore * 0.9f;
+        }
+        if(jugde == "bad"){
+            score += pernotesscore * 0.7f;
+        }
+        if(jugde == "miss"){
+            score += 0.0f;
         }
     }
 }
