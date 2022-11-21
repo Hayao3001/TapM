@@ -32,14 +32,19 @@ public class ButtonClickObject : MonoBehaviour
     private GameObject startbutton;
     private GameObject backbutton;
 
+    private GameObject HighScoreText;
+    private Text high_score;
+
     //Canvasを保存するための変数
     private Transform Canvas;
 
-    //ハイスコアを表示するText変数
-    [SerializeField] private Text HighScoreText;
-
     //ハイスコア用変数
     private int highScore;
+
+    public string GetSetHighScoreKey{
+        get { return this.higeScore_key; }
+        set { this.higeScore_key = value; }
+    }
 
     //ハイスコアが保存されているキー変数
     private string higeScore_key;
@@ -50,6 +55,10 @@ public class ButtonClickObject : MonoBehaviour
         selectmanager = GameObject.Find("SelectManager");
         SelectManager = selectmanager.GetComponent(typeof(SelectManager)) as SelectManager;
         Canvas = SelectManager.GetCanvas();
+        HighScoreText = SelectManager.GetSetHighScoreText;
+        high_score = HighScoreText.GetComponent(typeof(Text)) as Text;
+        //ハイスコアの設定
+        highScore = PlayerPrefs.GetInt(higeScore_key, 0);
     }
 
     public void OnClickMainButton(){
@@ -73,6 +82,10 @@ public class ButtonClickObject : MonoBehaviour
             backbutton.transform.SetParent(Canvas);
 
             SelectManager.ChangeisStartButton();
+
+            high_score.text = "HighScore:"+highScore;
+            Debug.Log("aaa");
+            HighScoreText.SetActive(true);
         }
     }
     public void OnClickStartButton(){
@@ -88,5 +101,6 @@ public class ButtonClickObject : MonoBehaviour
                 }
         }
         SelectManager.StopMusic();
+        HighScoreText.SetActive(false);
     }
 }

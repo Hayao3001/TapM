@@ -8,6 +8,8 @@ public class MusicData {
     public string name;
     public AudioClip music;
     public string SceneName;
+    public string HighScore_Key;
+
 
     public string GetMusicName(){
         return this.name;
@@ -18,6 +20,9 @@ public class MusicData {
     }
     public string GetSceneName(){
         return this.SceneName;
+    }
+    public string GetHighScore_Key(){
+        return this.HighScore_Key;
     }
 }
 

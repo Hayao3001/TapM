@@ -31,6 +31,14 @@ public class SelectManager : MonoBehaviour
     //音楽を操作する変数
     private static AudioSource audioSource;
 
+    //ハイスコアを表示するText変数
+    [SerializeField] private GameObject HighScoreText;
+
+    public GameObject GetSetHighScoreText{
+        get { return this.HighScoreText; }
+        set { this.HighScoreText = value; }
+    }
+
     public void ChangeisStartButton(){
         isStartButton = !isStartButton;
     }
@@ -78,6 +86,7 @@ public class SelectManager : MonoBehaviour
             var button_Click = obj.GetComponent(typeof(ButtonClickObject)) as ButtonClickObject;
             button_Click.GetSetSceneName = MusicDataList[i].GetSceneName();
             button_Click.GetSetMusic = MusicDataList[i].GetMusic();
+            button_Click.GetSetHighScoreKey = MusicDataList[i].GetHighScore_Key();
             
 
             base_y -= 120f;
