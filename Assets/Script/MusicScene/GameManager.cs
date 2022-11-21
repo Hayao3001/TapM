@@ -89,6 +89,9 @@ public class GameManager : MonoBehaviour
     //動画が再生し終わったあとのカウントダウン用変数
     private float countdown = 1.5f;
 
+    //Notesを保存する親オブジェクトの変数
+    [SerializeField] private Transform NotesParent;
+
 
     // Start is called before the first frame update
     void Start()
