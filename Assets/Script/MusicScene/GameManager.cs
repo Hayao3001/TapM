@@ -119,6 +119,11 @@ public class GameManager : MonoBehaviour
     //音楽終了時の判定がこれがないと最初に流すときの判定式とおなじになってしまうので
     private bool isFirstPlay = false;
 
+    //コンボ数を記録する変数
+    private int Combo = 0;
+
+    [SerializeField] private GameObject ComboText;
+    private Text combo_text;
 
     void Awake() {
         //ハイスコアの設定
@@ -138,6 +143,7 @@ public class GameManager : MonoBehaviour
         finish_score = FinishScoreText.GetComponent(typeof(Text)) as Text;
         //ハイスコア用の表示設定
         high_score = HighScoreText.GetComponent(typeof(Text)) as Text;
+        combo_text = ComboText.GetComponent(typeof(Text)) as Text;
     }
     // Start is called before the first frame update
     void Start()
@@ -169,6 +175,7 @@ public class GameManager : MonoBehaviour
                 }
                 nowtime += Time.deltaTime;
                 score_text.text = score.ToString("f0");
+                combo_text.text = "Combo:"+Combo.ToString();
                 if(!isStop && !audioSource.isPlaying && isFirstPlay){
                     FinishGame();
                 }
@@ -214,15 +221,19 @@ public class GameManager : MonoBehaviour
         Debug.Log(jugde);
         if(jugde == "perfect"){
             score += pernotesscore;
+            Combo += 1;
         }
         if(jugde == "great"){
             score += pernotesscore * 0.9f;
+            Combo += 1;
         }
         if(jugde == "bad"){
             score += pernotesscore * 0.7f;
+            Combo = 0;
         }
         if(jugde == "miss"){
             score += 0.0f;
+            Combo = 0;
         }
     }
 
