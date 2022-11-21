@@ -63,6 +63,10 @@ public class CreateBlock : MonoBehaviour
     //ブロックのクラス変数。これでノーツスピードを取る。
     Block block;
 
+    //Notesを保存する親オブジェクトの変数
+    [SerializeField] private Transform NotesParent;
+
+
     public void Start(){
         block = bottomblock.GetComponent(typeof(Block)) as Block;
         //どのノーツのゲームオブジェクトも全てスピードが同じ
@@ -151,6 +155,7 @@ public class CreateBlock : MonoBehaviour
                 place = new Vector3(place_x_y,place_y,0f);
                 //ロングノーツの配置
                 longnotes = Instantiate(bottomlongblock,place, Quaternion.identity);
+                longnotes.transform.SetParent(NotesParent);
 
                 Block longobject = longnotes.GetComponent(typeof(Block)) as Block;
                 longobject.ChangeIsLongNotes();
@@ -167,6 +172,7 @@ public class CreateBlock : MonoBehaviour
                 place = new Vector3(place_x_y,3f,0f);
                 //ノーツの配置
                 notes = Instantiate(bottomblock,place, Quaternion.identity);
+                notes.transform.SetParent(NotesParent);
 
                 //サイズ変更部分
                 size = notes.transform.localScale;
@@ -196,6 +202,7 @@ public class CreateBlock : MonoBehaviour
 
                 //ロングノーツの配置
                 longnotes = Instantiate(rightlongblcok,place, Quaternion.Euler(0f, 0f, 90f));
+                longnotes.transform.SetParent(NotesParent);
 
                 //Blockクラスのロングノーツである設定を行う。
                 Block longobject = longnotes.GetComponent(typeof(Block)) as Block;
@@ -215,6 +222,7 @@ public class CreateBlock : MonoBehaviour
                 
                 //ノーツの配置
                 notes = Instantiate(rightblcok,place, Quaternion.Euler(0f, 0f, 90f));
+                notes.transform.SetParent(NotesParent);
 
                 //サイズ変更部分
                 size = notes.transform.localScale;
@@ -244,6 +252,7 @@ public class CreateBlock : MonoBehaviour
 
                 //ロングノーツの配置
                 longnotes = Instantiate(toplongblock,place, Quaternion.identity);
+                longnotes.transform.SetParent(NotesParent);
 
                 //Blockクラスのロングノーツである設定を行う。
                 Block longobject = longnotes.GetComponent(typeof(Block)) as Block;
@@ -263,6 +272,7 @@ public class CreateBlock : MonoBehaviour
 
                 //ノーツの配置
                 notes = Instantiate(topblock,place, Quaternion.identity);
+                notes.transform.SetParent(NotesParent);
 
                 //サイズ変更部分
                 size = notes.transform.localScale;
@@ -292,6 +302,7 @@ public class CreateBlock : MonoBehaviour
         
                 //ロングノーツの配置
                 longnotes = Instantiate(leftlongblock,place, Quaternion.Euler(0f, 0f, 90f));
+                longnotes.transform.SetParent(NotesParent);
 
                 //Blockクラスのロングノーツである設定を行う。
                 Block longobject = longnotes.GetComponent(typeof(Block)) as Block;
@@ -311,6 +322,7 @@ public class CreateBlock : MonoBehaviour
 
                 //ノーツの配置
                 notes = Instantiate(leftblock,place, Quaternion.Euler(0f, 0f, 90f));
+                notes.transform.SetParent(NotesParent);
 
                 //サイズ変更部分
                 size = notes.transform.localScale;

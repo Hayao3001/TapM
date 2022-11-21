@@ -57,8 +57,14 @@ public class Block : MonoBehaviour
     //ロングノーツだった場合の時間間
     private float intertime;
 
+    public float GetInterTime(){return intertime;}
+
     //ロングノーツが判定ラインに入ったときの判定変数
     private bool isEntryLongNotes = false;
+
+    //GameManager用のゲームオブジェクト変数
+    private GameObject GameManager;
+    private GameManager gamemanager;
 
     public void ChangeisEntryLongNotes(){
         isEntryLongNotes = !isEntryLongNotes;
@@ -74,8 +80,9 @@ public class Block : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         if(islongnotes){
             intertime = endtime - starttime;
-            Debug.Log(intertime);
         }
+        GameManager = GameObject.Find("GameManager");
+        gamemanager = GameManager.GetComponent(typeof(GameManager)) as GameManager;
     }
 
     // Update is called once per frame
@@ -94,12 +101,14 @@ public class Block : MonoBehaviour
         if(islongnotes){
             //ロングノーツが入ったときの時間を記録して、その時間がロングノーツ単体の時間+1.0f秒経過したらそのオブジェクトを消す
             if(longnotes_entrytime > intertime + 1.0f){
+                gamemanager.SetScore("miss");
                 Destroy(this.gameObject);
             }
 
         }else{
             //ノーツが入って1.0f秒立ったらそのオブジェクトを消す。
             if(difference_time > 1.0f){
+                gamemanager.SetScore("miss");
                 Destroy(this.gameObject);
             }
         }
@@ -154,4 +163,5 @@ public class Block : MonoBehaviour
     public float TimeDifference(){
         return difference_time;
     }
+
 }

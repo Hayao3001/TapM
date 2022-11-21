@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36b688a5c80702d4e9a7db481e78c8b6, type: 3}
+  m_Name: MusicDataBase
+  m_EditorClassIdentifier: 
+  musicdatabase:
+  - name: Unwelcom School
+    music: {fileID: 8300000, guid: 285662f19b0e0c948b5a2a7b53762335, type: 3}
+    SceneName: MusicScene
+    HighScore_Key: Test
+  - name: hogehuga
+    music: {fileID: 8300000, guid: 4b1523e18578eb44e98099790d4180c1, type: 3}
+    SceneName: MusicScene
+    HighScore_Key: Test
