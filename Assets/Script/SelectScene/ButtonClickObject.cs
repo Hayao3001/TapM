@@ -13,6 +13,14 @@ public class ButtonClickObject : MonoBehaviour
         set{ this.SceneName = value; }
     }
 
+    //音楽データ保存用変数
+    private AudioClip music;
+
+    public AudioClip GetSetMusic{
+        get{ return this.music; }
+        set{ this.music = value; }
+    }
+
     //SelectManagerを生成するためのゲームオブジェクト変数
     private GameObject selectmanager;
     private SelectManager SelectManager;
@@ -35,6 +43,7 @@ public class ButtonClickObject : MonoBehaviour
 
     public void OnClickMainButton(){
         if(!SelectManager.GetisStartButton()){
+            SelectManager.StartMusic(music);
             var place_start_button = new Vector3(-674f+960f,-260f+540f);
             var place_back_button = new Vector3(-224f+960f,-260f+540f);
             startbutton = Instantiate(StartButton, place_start_button, Quaternion.identity) as GameObject;
@@ -67,5 +76,6 @@ public class ButtonClickObject : MonoBehaviour
                     Destroy( Canvas.GetChild(i).gameObject );
                 }
         }
+        SelectManager.StopMusic();
     }
 }

@@ -92,10 +92,24 @@ public class GameManager : MonoBehaviour
     //Notesを保存する親オブジェクトの変数
     [SerializeField] private Transform NotesParent;
 
+    //音楽データを保存する変数
+    [SerializeField] private AudioClip music;
+
+    //音楽を操作する変数
+    private AudioSource audioSource;
+
+    //再生中かどうかを識別する変数
+    private bool isPlaying = false;
+
 
     // Start is called before the first frame update
     void Start()
     {
+        //メディアプレイヤーを設定
+        videoplayer = VideoClip.GetComponent(typeof(VideoPlayer)) as VideoPlayer;
+        audioSource = gameObject.GetComponent<AudioSource>();
+        audioSource.clip = music;
+        videoplayer.Play();
         Time.timeScale = 1;
         //CSVファイルからデータを受け取る関数
         GetCSV();
@@ -108,9 +122,6 @@ public class GameManager : MonoBehaviour
         exit_button.SetActive(false);
         retry_button.SetActive(false);
         pause_button.SetActive(false);
-        //メディアプレイヤーを設定
-        videoplayer = VideoClip.GetComponent(typeof(VideoPlayer)) as VideoPlayer;
-        videoplayer.Play();
     }
 
     // Update is called once per frame
@@ -118,6 +129,10 @@ public class GameManager : MonoBehaviour
     {
         if(!videoplayer.isPlaying && Time.time > 1.0f){
             if(countdown < 0.0f){
+                if(!isPlaying){
+                    audioSource.Play();
+                    isPlaying = true;
+                }
                 if(rowcount < rownum){
                     if(CSVDatas[rowcount].GetStartTime() < nowtime){
                         createblock.SetBlock(CSVDatas[rowcount].GetLineName(), CSVDatas[rowcount].GetType(), CSVDatas[rowcount].GetStartTime(), CSVDatas[rowcount].GetEndTime());
@@ -182,6 +197,7 @@ public class GameManager : MonoBehaviour
 
     public void OnClickPause(){
         Time.timeScale = 0;
+        audioSource.Pause();
         restart_button.SetActive(true);
         exit_button.SetActive(true);
         retry_button.SetActive(true);
@@ -194,6 +210,7 @@ public class GameManager : MonoBehaviour
 
     public void OnClickRestartButton(){
         Time.timeScale = 1;
+        audioSource.UnPause();
         restart_button.SetActive(false);
         exit_button.SetActive(false);
         retry_button.SetActive(false);

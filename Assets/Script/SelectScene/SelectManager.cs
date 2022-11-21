@@ -28,6 +28,9 @@ public class SelectManager : MonoBehaviour
     //Startボタンが出てるかどうかを判断する変数
     private bool isStartButton = false;
 
+    //音楽を操作する変数
+    private static AudioSource audioSource;
+
     public void ChangeisStartButton(){
         isStartButton = !isStartButton;
     }
@@ -74,9 +77,20 @@ public class SelectManager : MonoBehaviour
 
             var button_Click = obj.GetComponent(typeof(ButtonClickObject)) as ButtonClickObject;
             button_Click.GetSetSceneName = MusicDataList[i].GetSceneName();
+            button_Click.GetSetMusic = MusicDataList[i].GetMusic();
             
 
             base_y -= 120f;
         }
+    }
+
+    public void StartMusic(AudioClip music){
+        audioSource = gameObject.GetComponent<AudioSource>();
+        audioSource.clip = music;
+        audioSource.Play();
+    }
+
+    public void StopMusic(){
+        audioSource.Stop();
     }
 }
