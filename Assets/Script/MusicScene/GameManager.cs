@@ -86,6 +86,14 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject ScoreText;
     private Text score_text;
 
+    //ゲーム終了時のスコア表示用テキストクラス変数
+    [SerializeField] private GameObject FinishScoreText;
+    private Text finish_score;
+
+    //ハイスコア用テキストクラス変数
+    [SerializeField] private GameObject HighScoreText;
+    private Text high_score;
+
     //動画が再生し終わったあとのカウントダウン用変数
     private float countdown = 1.5f;
 
@@ -98,30 +106,50 @@ public class GameManager : MonoBehaviour
     //音楽を操作する変数
     private AudioSource audioSource;
 
-    //再生中かどうかを識別する変数
-    private bool isPlaying = false;
+    //停止ボタンか押されてかどうかを識別する変数
+    private bool isStop = false;
+
+    //ハイスコア用変数
+    private float highScore;
+
+    //ハイスコアが保存されているキー変数
+    [SerializeField] private string higeScore_key;
+
+    //最初に再生されたときにTrueに変える変数
+    //音楽終了時の判定がこれがないと最初に流すときの判定式とおなじになってしまうので
+    private bool isFirstPlay = false;
 
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        //メディアプレイヤーを設定
+    void Awake() {
+        //ハイスコアの設定
+        highScore = PlayerPrefs.GetInt(higeScore_key, 0);
+        //CSVファイルからデータを受け取る関数
+        GetCSV();
+        //メディアの設定
         videoplayer = VideoClip.GetComponent(typeof(VideoPlayer)) as VideoPlayer;
         audioSource = gameObject.GetComponent<AudioSource>();
         audioSource.clip = music;
         videoplayer.Play();
-        Time.timeScale = 1;
-        //CSVファイルからデータを受け取る関数
-        GetCSV();
         //ノーツ生成用クラス定義
         createblock = CreateBlockObject.GetComponent(typeof(CreateBlock)) as CreateBlock;
         //スコア表示用の定義
         score_text = ScoreText.GetComponent(typeof(Text)) as Text;
+        //ゲーム終了時のスコア表示の設定
+        finish_score = FinishScoreText.GetComponent(typeof(Text)) as Text;
+        //ハイスコア用の表示設定
+        high_score = HighScoreText.GetComponent(typeof(Text)) as Text;
+    }
+    // Start is called before the first frame update
+    void Start()
+    {
+        Time.timeScale = 1;
         //ボタンは最初は非表示にしておく
         restart_button.SetActive(false);
         exit_button.SetActive(false);
         retry_button.SetActive(false);
         pause_button.SetActive(false);
+        FinishScoreText.SetActive(false);
+        HighScoreText.SetActive(false);
     }
 
     // Update is called once per frame
@@ -129,9 +157,9 @@ public class GameManager : MonoBehaviour
     {
         if(!videoplayer.isPlaying && Time.time > 1.0f){
             if(countdown < 0.0f){
-                if(!isPlaying){
+                if(!isStop && !audioSource.isPlaying && !isFirstPlay){
                     audioSource.Play();
-                    isPlaying = true;
+                    isFirstPlay = true;
                 }
                 if(rowcount < rownum){
                     if(CSVDatas[rowcount].GetStartTime() < nowtime){
@@ -141,6 +169,9 @@ public class GameManager : MonoBehaviour
                 }
                 nowtime += Time.deltaTime;
                 score_text.text = score.ToString("f0");
+                if(!isStop && !audioSource.isPlaying && isFirstPlay){
+                    FinishGame();
+                }
             }else{
                 countdown -= Time.deltaTime;
                 pause_button.SetActive(true);
@@ -198,6 +229,7 @@ public class GameManager : MonoBehaviour
     public void OnClickPause(){
         Time.timeScale = 0;
         audioSource.Pause();
+        isStop = true;
         restart_button.SetActive(true);
         exit_button.SetActive(true);
         retry_button.SetActive(true);
@@ -210,6 +242,7 @@ public class GameManager : MonoBehaviour
 
     public void OnClickRestartButton(){
         Time.timeScale = 1;
+        isStop = false;
         audioSource.UnPause();
         restart_button.SetActive(false);
         exit_button.SetActive(false);
@@ -219,5 +252,16 @@ public class GameManager : MonoBehaviour
 
     public void OnClickExitButton(){
         SceneManager.LoadScene("SelectScene");
+    }
+
+    private void FinishGame(){
+        ScoreText.SetActive(false);
+        if(score > highScore){
+            highScore = score;
+            PlayerPrefs.SetInt(higeScore_key, (int)Math.Floor(highScore));
+            HighScoreText.SetActive(true);
+        }
+        finish_score.text = "Score:"+score.ToString("f0");
+        FinishScoreText.SetActive(true);
     }
 }

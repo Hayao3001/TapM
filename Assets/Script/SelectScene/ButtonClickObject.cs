@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class ButtonClickObject : MonoBehaviour
 {
@@ -33,6 +34,16 @@ public class ButtonClickObject : MonoBehaviour
 
     //Canvasを保存するための変数
     private Transform Canvas;
+
+    //ハイスコアを表示するText変数
+    [SerializeField] private Text HighScoreText;
+
+    //ハイスコア用変数
+    private int highScore;
+
+    //ハイスコアが保存されているキー変数
+    private string higeScore_key;
+
     // Start is called before the first frame update
     void Start()
     {
