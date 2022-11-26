@@ -14,10 +14,10 @@ public class CSV : MonoBehaviour
 {
     private static int rownum = 0;
 
-    public static void AddCSV(string filename, string linename, string tyepname, float startime, float endtime){
+    public static void AddCSV(string filename, string linename, string tyepname, float startime, float endtime, float notes_speed){
         var list = "";
         Debug.Log(filename);
-        list = linename + "," + tyepname + "," + startime.ToString() + "," + endtime.ToString() + "\n";
+        list = linename + "," + tyepname + "," + startime.ToString() + "," + endtime.ToString() + "," + notes_speed.ToString() + "\n";
         if(filename == null){
             return;
         }
@@ -193,12 +193,12 @@ public class EditMusicScore : EditorWindow
                 GUILayout.Space(sp+3);
                 GUILayout.Box("rightline"+a.ToString(), GUILayout.Height(heightspace),GUILayout.Width(120f));
             }
-            for(int i = 0; i <= 3; i++){
+            for(int i = 0; i <= 4; i++){
                 int a = i + 1;
                 GUILayout.Space(sp+3);
                 GUILayout.Box("topline"+a.ToString(), GUILayout.Height(heightspace),GUILayout.Width(120f));
             }
-            for(int i = 0; i <= 4; i++){
+            for(int i = 0; i <= 3; i++){
                 int a = i + 1;
                 GUILayout.Space(sp+3);
                 GUILayout.Box("leftline"+a.ToString(), GUILayout.Height(heightspace),GUILayout.Width(120f));
@@ -322,7 +322,7 @@ public class EditMusicScore : EditorWindow
                             if(starttime == endtime){
                                 EditorGUI.DrawRect(new Rect(starttime*space*scale*per_bpm, basepos+perbasepos*i, 1*scale, 10), Color.green);
                             }else{
-                                EditorGUI.DrawRect(new Rect(starttime*space*scale*per_bpm, basepos+perbasepos*i, endtime*space*scale-starttime*space*scale, 10), Color.green);
+                                EditorGUI.DrawRect(new Rect(starttime*space*scale*per_bpm, basepos+perbasepos*i, endtime*space*scale*per_bpm-starttime*space*scale*per_bpm, 10), Color.green);
                             }
                         }   
                     }
@@ -382,6 +382,7 @@ public class AddBlock: EditorWindow{
     private float beat_num = 0.0f;
     private float end_measure_num = 0.0f;
     private float end_beat_num = 0.0f;
+    private float notes_speed = 0.9f;
     private static bool canSet = true;
     private string filepath;
     private static string filename = "MusicData";
@@ -468,6 +469,12 @@ public class AddBlock: EditorWindow{
             }
         }
         GUILayout.Space(35f);
+
+        GUILayout.Label("notes speed");
+        notes_speed = EditorGUILayout.DelayedFloatField(notes_speed);
+
+        GUILayout.Space(35f);
+
         if(GUILayout.Button("Add")){
             if(_StartWirteIndex == 1){
                 startime = ((float)240/(float)EditMusicScore.GetBpm()/(float)((float)4*(float)(_MeasureIndex+1)))*((float)((4*(_MeasureIndex+1))*measure_num + beat_num));
@@ -476,9 +483,9 @@ public class AddBlock: EditorWindow{
                 endtime = ((float)240/(float)EditMusicScore.GetBpm()/(float)((float)4*(float)(_EndMeasureIndex+1)))*((float)((4*(_EndMeasureIndex+1))*end_measure_num + end_beat_num));
             }
             if(_TypeIndex == 1){
-                CSV.AddCSV(filepath, Line[_LineIndex], BlockType[_TypeIndex], startime, endtime);
+                CSV.AddCSV(filepath, Line[_LineIndex], BlockType[_TypeIndex], startime, endtime, notes_speed);
             }else{
-                CSV.AddCSV(filepath, Line[_LineIndex], BlockType[_TypeIndex], startime, 0.0f);
+                CSV.AddCSV(filepath, Line[_LineIndex], BlockType[_TypeIndex], startime, 0.0f, notes_speed);
             }
             CSV.GetCSV(filename, CSVData);
             EditMusicScore.UpdateCSV();

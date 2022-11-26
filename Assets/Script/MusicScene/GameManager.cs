@@ -17,18 +17,22 @@ class CSVData{
     private float startime;
     //ロングノーツの場合その最後の時間を入れる変数
     private float endtime;
+    //ノーツのスピード
+    private float notesspeed;
 
-    public CSVData(string linename, string type, float startime, float endtime){
+    public CSVData(string linename, string type, float startime, float endtime, float notesspeed){
         this.linename = linename;
         this.type = type;
         this.startime = startime;
         this.endtime = endtime;
+        this.notesspeed = notesspeed;
     }
 
     public string GetLineName(){return this.linename;}
     public string GetType(){return this.type;}
     public float GetStartTime(){return this.startime;}
     public float GetEndTime(){return this.endtime;}
+    public float GetnotesSpeed(){return this.notesspeed;}
 }
 
 public class GameManager : MonoBehaviour
@@ -122,10 +126,13 @@ public class GameManager : MonoBehaviour
     //コンボ数を記録する変数
     private int Combo = 0;
 
+    private float music_start_time = 2.5f;
+
     [SerializeField] private GameObject ComboText;
     private Text combo_text;
 
     void Awake() {
+        Time.timeScale = 1;
         //ハイスコアの設定
         highScore = PlayerPrefs.GetInt(higeScore_key, 0);
         //CSVファイルからデータを受け取る関数
@@ -134,7 +141,6 @@ public class GameManager : MonoBehaviour
         videoplayer = VideoClip.GetComponent(typeof(VideoPlayer)) as VideoPlayer;
         audioSource = gameObject.GetComponent<AudioSource>();
         audioSource.clip = music;
-        videoplayer.Play();
         //ノーツ生成用クラス定義
         createblock = CreateBlockObject.GetComponent(typeof(CreateBlock)) as CreateBlock;
         //スコア表示用の定義
@@ -144,11 +150,6 @@ public class GameManager : MonoBehaviour
         //ハイスコア用の表示設定
         high_score = HighScoreText.GetComponent(typeof(Text)) as Text;
         combo_text = ComboText.GetComponent(typeof(Text)) as Text;
-    }
-    // Start is called before the first frame update
-    void Start()
-    {
-        Time.timeScale = 1;
         //ボタンは最初は非表示にしておく
         restart_button.SetActive(false);
         exit_button.SetActive(false);
@@ -156,33 +157,50 @@ public class GameManager : MonoBehaviour
         pause_button.SetActive(false);
         FinishScoreText.SetActive(false);
         HighScoreText.SetActive(false);
+        pause_button.SetActive(true);
+        StartCoroutine(VideoStart());
+    }
+    // Start is called before the first frame update
+    void Start()
+    {
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        if(!videoplayer.isPlaying && Time.time > 1.0f){
-            if(countdown < 0.0f){
-                if(!isStop && !audioSource.isPlaying && !isFirstPlay){
-                    audioSource.Play();
-                    isFirstPlay = true;
-                }
-                if(rowcount < rownum){
-                    if(CSVDatas[rowcount].GetStartTime() < nowtime){
-                        createblock.SetBlock(CSVDatas[rowcount].GetLineName(), CSVDatas[rowcount].GetType(), CSVDatas[rowcount].GetStartTime(), CSVDatas[rowcount].GetEndTime());
-                        rowcount += 1;
-                    }
-                }
-                nowtime += Time.deltaTime;
-                score_text.text = score.ToString("f0");
-                combo_text.text = "Combo:"+Combo.ToString();
-                if(!isStop && !audioSource.isPlaying && isFirstPlay){
-                    FinishGame();
-                }
-            }else{
-                countdown -= Time.deltaTime;
-                pause_button.SetActive(true);
-            }
+        score_text.text = score.ToString("f0");
+        combo_text.text = "Combo:"+Combo.ToString();
+        if(!isStop && !audioSource.isPlaying && isFirstPlay){
+            FinishGame();
+        }
+    }
+
+    IEnumerator VideoStart(){
+        videoplayer.Play();
+
+        yield return new WaitForSeconds(5);
+        
+        StartCoroutine(MusicStart());
+    }
+
+    IEnumerator MusicStart(){
+        StartCoroutine(CreateNotes());
+
+        yield return new WaitForSeconds(1);
+
+        audioSource.Play();
+
+        isFirstPlay = true;
+    }
+
+    IEnumerator CreateNotes(){
+        // yield return new WaitForSeconds(CSVDatas[0].GetStartTime());
+
+        createblock.SetBlock(CSVDatas[0].GetLineName(), CSVDatas[0].GetType(), CSVDatas[0].GetStartTime(), CSVDatas[0].GetEndTime());
+
+        for(rowcount = 1; rowcount < rownum; rowcount++){
+            yield return new WaitForSeconds((float)CSVDatas[rowcount].GetnotesSpeed() * (CSVDatas[rowcount].GetStartTime()-CSVDatas[rowcount-1].GetStartTime()));
+            createblock.SetBlock(CSVDatas[rowcount].GetLineName(), CSVDatas[rowcount].GetType(), CSVDatas[rowcount].GetStartTime(), CSVDatas[rowcount].GetEndTime());
         }
     }
 
@@ -195,7 +213,7 @@ public class GameManager : MonoBehaviour
         //CSVファイルのデータを１行ずつみて列ごとに分割してCSVDatasにデータを追加する処理。
         while(file.Peek() != -1){
             string line = file.ReadLine();
-            CSVData[] csvdata = new CSVData[]{new CSVData(line.Split(',')[0],line.Split(',')[1],(float.Parse(line.Split(',')[2])-1.0f),(float.Parse(line.Split(',')[3]))-1.0f)};
+            CSVData[] csvdata = new CSVData[]{new CSVData(line.Split(',')[0],line.Split(',')[1],(float.Parse(line.Split(',')[2])-1.0f),(float.Parse(line.Split(',')[3]))-1.0f,(float.Parse(line.Split(',')[4])))};
             CSVDatas.AddRange(csvdata);
             rownum = rownum + 1;
         }
@@ -274,5 +292,9 @@ public class GameManager : MonoBehaviour
         }
         finish_score.text = "Score:"+score.ToString("f0");
         FinishScoreText.SetActive(true);
+        exit_button.SetActive(true);
+        retry_button.SetActive(true);
+        pause_button.SetActive(false);
+        ComboText.SetActive(false);
     }
 }

@@ -149,7 +149,7 @@ public class CreateBlock : MonoBehaviour
 
             if(type == "Long"){
                 //ロングノーツのy座標変数
-                float place_y = (((notesspeed * intertime) / longnotesheigh)*longnotesheigh) * 0.5f;
+                float place_y = left_down_y+notesspeed+((((notesspeed * intertime) / longnotesheigh)*longnotesheigh)*0.5f);
 
                 //設置場所の指定
                 place = new Vector3(place_x_y,place_y,0f);
@@ -169,7 +169,7 @@ public class CreateBlock : MonoBehaviour
                 longnotes.transform.localScale = size;
             }else{
                 //設置場所の指定
-                place = new Vector3(place_x_y,3f,0f);
+                place = new Vector3(place_x_y,left_down_y+notesspeed,0f);
                 //ノーツの配置
                 notes = Instantiate(bottomblock,place, Quaternion.identity);
                 notes.transform.SetParent(NotesParent);
@@ -195,10 +195,10 @@ public class CreateBlock : MonoBehaviour
             block_length = ((linelength)/(float)4) * length_basic;
             if(type == "Long"){
                 //ロングノーツのx座標変数
-                float place_x = (((notesspeed * intertime) / longnotesheigh)*longnotesheigh) * 0.5f;
+                float place_x = right_down_x-notesspeed-((((notesspeed * intertime) / longnotesheigh)*longnotesheigh)*0.5f);
 
                 //設置場所の指定
-                place = new Vector3(-1.0f*place_x,place_x_y,0f);
+                place = new Vector3(place_x,place_x_y,0f);
 
                 //ロングノーツの配置
                 longnotes = Instantiate(rightlongblcok,place, Quaternion.Euler(0f, 0f, 90f));
@@ -218,7 +218,7 @@ public class CreateBlock : MonoBehaviour
 
             }else{
                 //設置場所の指定
-                place = new Vector3(0f,place_x_y,0f);
+                place = new Vector3(right_down_x-notesspeed,place_x_y,0f);
                 
                 //ノーツの配置
                 notes = Instantiate(rightblcok,place, Quaternion.Euler(0f, 0f, 90f));
@@ -245,10 +245,10 @@ public class CreateBlock : MonoBehaviour
 
             if(type == "Long"){
                 //ロングノーツのy座標変数
-                float place_y = (((notesspeed * intertime) / longnotesheigh)*longnotesheigh) * 0.5f;
+                float place_y = left_up_y-notesspeed-((((notesspeed * intertime) / longnotesheigh)*longnotesheigh)*0.5f);
 
                 //設置場所の指定
-                place = new Vector3(place_x_y,-1.0f*place_y,0f);
+                place = new Vector3(place_x_y,place_y,0f);
 
                 //ロングノーツの配置
                 longnotes = Instantiate(toplongblock,place, Quaternion.identity);
@@ -268,7 +268,7 @@ public class CreateBlock : MonoBehaviour
 
             }else{
                 //設置場所の指定
-                place = new Vector3(place_x_y,-3f,0f);
+                place = new Vector3(place_x_y,left_up_y-notesspeed,0f);
 
                 //ノーツの配置
                 notes = Instantiate(topblock,place, Quaternion.identity);
@@ -295,7 +295,7 @@ public class CreateBlock : MonoBehaviour
 
             if(type == "Long"){
                 //ロングノーツのx座標変数
-                float place_x = (((notesspeed * intertime) / longnotesheigh)*longnotesheigh) * 0.5f;
+                float place_x = left_down_x+notesspeed+((((notesspeed * intertime) / longnotesheigh)*longnotesheigh)*0.5f);
 
                 //設置場所の指定
                 place = new Vector3(place_x,place_x_y,0f);
@@ -318,7 +318,7 @@ public class CreateBlock : MonoBehaviour
 
             }else{
                 //設置場所の指定
-                place = new Vector3(0f,place_x_y,0f);
+                place = new Vector3(left_down_x+notesspeed,place_x_y,0f);
 
                 //ノーツの配置
                 notes = Instantiate(leftblock,place, Quaternion.Euler(0f, 0f, 90f));

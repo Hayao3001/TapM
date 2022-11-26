@@ -16,8 +16,4 @@ MonoBehaviour:
   - name: Unwelcom School
     music: {fileID: 8300000, guid: 285662f19b0e0c948b5a2a7b53762335, type: 3}
     SceneName: MusicScene
-    HighScore_Key: Test
-  - name: hogehuga
-    music: {fileID: 8300000, guid: 4b1523e18578eb44e98099790d4180c1, type: 3}
-    SceneName: MusicScene
-    HighScore_Key: Test
+    HighScore_Key: UnwelcomeSchool
